@@ -45,7 +45,7 @@ class GESController():
             fm = FastMail(conf)
             await fm.send_message(message)
             logger.info(f"Email has been sent successfully to: {email.to} - cc: {email.cc} - bcc: {email.bcc} - subject: {email.subject} - No. of attachments: {len(email.attachments)}")
-            response.status_code = status.HTTP_201_CREATED
+            response.status_code = status.HTTP_200_OK
             return jsonable_encoder({ "msg": "Email has been sent successfully", "status": status.HTTP_200_OK })
         except Exception as err:
             response.status_code = status.HTTP_400_BAD_REQUEST
