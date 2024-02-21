@@ -64,7 +64,7 @@ class GGSController():
                            "Tomato___Early_blight","Tomato___Late_blight","Tomato___Leaf_Mold","Tomato___Septoria_leaf_spot","Tomato___Spider_mites Two-spotted_spider_mite",
                            "Tomato___Target_Spot","Tomato___Tomato_Yellow_Leaf_Curl_Virus","Tomato___Tomato_mosaic_virus","Tomato___healthy"
                           ]
-
+            # Critical code needs to be handled
             predicted_disease_summary = class_names[predicted_class.item()].split("___")
             plant_name = predicted_disease_summary[0]
             disease_status = "Unhealhty" if predicted_disease_summary[1] != "healhty" else "Healhty"

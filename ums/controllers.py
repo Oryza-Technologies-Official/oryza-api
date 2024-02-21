@@ -5,7 +5,7 @@ import logging
 from fastapi import status,Response
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
-from ums.schemas import UserSchema
+from ums.schemas import UserSchema,UpdateUserSchema
 from ums.models import User
 
 LOG_FILE_PATH = os.path.join(os.getcwd(),"logs","ums_logs","ums.log")
@@ -45,4 +45,18 @@ class UserController():
             response.status_code = status.HTTP_400_BAD_REQUEST
             logger.error(str(err))
             return jsonable_encoder({ "error": str(err), "status": status.HTTP_400_BAD_REQUEST })
+    @staticmethod
+    def update_user(user: UpdateUserSchema,response: Response,db: Session):
+        try:
+            user_id = user.user_id
+            field_name = user.field_name
+            new_value = user.new_value
+
+            is_updated = db.query(User).filter(User.user_id == user_id).first()
+            if is_updated:
+                pass
+        except Exception as err:
+            response.status_code = status.HTTP_417_EXPECTATION_FAILED
+            logger.error(str(err))
+            return jsonable_encoder({ "error": str(err), "status": status.HTTP_417_EXPECTATION_FAILED })
 
